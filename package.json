@@ -20,37 +20,32 @@
   "scripts": {
     "start:firefox": "npm-run-all -l _build:firefox:manifest --parallel -rl _watch:scripts _watch:types _watch:webext",
     "start:chromium": "npm-run-all -l _build:chromium:manifest --parallel -rl _watch:scripts _watch:types",
-
     "build:firefox": "run-s -l _build:firefox:manifest _build:types _build:scripts",
     "build:chromium": "run-s -l _build:chromium:manifest _build:types _build:scripts",
-
     "package:all": "run-s package:firefox package:chromium",
     "package:firefox": "run-s _build:firefox:manifest _build:types _build:scripts _package:firefox:archive",
     "package:chromium": "run-s _build:chromium:manifest _build:types _build:scripts _package:chromium:archive",
-
     "_watch:scripts": "node scripts/esbuild.js --watch",
     "_watch:types": "tsc --watch",
-    "_watch:webext": "web-ext run --devtools --start-url about:addons",
-    
+    "_watch:webext": "web-ext run",
     "_build:firefox:manifest": "node scripts/manifest.js firefox",
     "_build:chromium:manifest": "node scripts/manifest.js chromium",
     "_build:scripts": "node scripts/esbuild.js",
     "_build:types": "tsc",
-
     "_package:firefox:archive": "web-ext build --filename {name}-{version}-firefox.zip --artifacts-dir archives/firefox",
     "_package:chromium:archive": "web-ext build --filename {name}-{version}-chromium.zip --artifacts-dir archives/chromium"
   },
   "devDependencies": {
     "@jest/globals": "^29.4.3",
     "@types/webextension-polyfill": "^0.10.0",
-    "esbuild": "0.20.2",
+    "esbuild": "^0.25.8",
     "jest": "^29.4.3",
     "jest-environment-jsdom": "^29.7.0",
     "npm-run-all": "^4.1.5",
     "ts-jest": "^29.0.5",
     "tslib": "^2.5.0",
     "typescript": "^5.0.4",
-    "web-ext": "^7.5.0",
+    "web-ext": "^8.9.0",
     "webextension-polyfill": "^0.10.0"
   }
 }
